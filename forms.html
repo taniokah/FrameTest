@@ -7,18 +7,40 @@
    src="https://forms.office.com/r/ZyYyrBW0Qw">
 
 </iframe>
-<script language="JavaScript"><!--
-	function newURL() {
-		document.Forms.location.href = "https://forms.office.com/r/5U8VGqne4K";
+<script language="JavaScript">
+	timer = 0
+	pageno = 0;
+	urls = ["https://forms.office.com/r/ZyYyrBW0Qw",
+					'https://forms.office.com/r/iGYC47UjsY',
+					'https://forms.office.com/r/Z7EjJQk4rU',
+					'https://forms.office.com/r/ppWKJryssE',
+	];
+	function nextURL() {
+		if (timer == 0) {
+			clearTimeout(timer);
+		}
+		if (pageno >= urls.length - 1) {
+			return;
+		}
+		pageno++;
+		document.Forms.location.href = urls[pageno];
+		timer = setTimeout(nextURL, 10000);
 	}
-	function openURL() {
-		//url = document.Forms.contentWindow.location.href;
-		url = document.Forms.location.href;
-		alert(url);
+	function prevURL() {
+		if (timer == 0) {
+			clearTimeout(timer);
+		}
+		if (pageno <= 0) {
+			return;
+		}
+		pageno--;
+		document.Forms.location.href = urls[pageno];
+		timer = setTimeout(nextURL, 1000);
 	}
+
 </script>
 <form>
-<input type="button" value="ページ２に変更" onClick="newURL()">
-<input type="button" value="URLを表示" onClick="openURL()">
+	<input type="button" value="前のページ" onClick="prevURL()">
+	<input type="button" value="次のページ" onClick="nextURL()">
 </form>
 </html>
